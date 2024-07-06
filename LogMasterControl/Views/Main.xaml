@@ -1,0 +1,61 @@
+﻿<Window x:Class="LogMasterControl.Views.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LogMasterControl.Views"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Title="Main" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--第一行-->
+        <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+            <TextBlock VerticalAlignment="Center" Margin="15,0" Text="显示"/>
+        </StackPanel>
+
+        <!--第二行-->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <ItemsControl ItemsSource="{Binding MessageList}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <md:TransitioningContent OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                            <Grid Width="220" Height="180" Margin="3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <!--画背景-->
+                                <Border Background="Yellow" Grid.RowSpan="2" CornerRadius="5">
+                                    <Canvas  ClipToBounds="True">
+                                        <Border Canvas.Top="10" Canvas.Right="-50" Width="120"  Height="120" Background="#ffffff" CornerRadius="100" Opacity="0.1"></Border>
+                                        <Border Canvas.Top="80" Canvas.Right="-30" Width="120"  Height="120" Background="#ffffff" CornerRadius="100" Opacity="0.1"></Border>
+                                    </Canvas>
+                                </Border>
+
+                                <md:PopupBox HorizontalAlignment="Right" Panel.ZIndex="1">
+                                    <Button Content="断开"/>
+                                </md:PopupBox>
+                                <!--<TextBlock Text="{Binding Title}" Margin="10,5" FontWeight="Bold"/>-->
+                                <TextBlock Grid.Row="1" Text="{Binding}" Margin="10,5"/>
+                            </Grid>
+                        </md:TransitioningContent>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>
